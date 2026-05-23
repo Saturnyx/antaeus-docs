@@ -1,0 +1,338 @@
+@use "sass:color";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Victor+Mono:wght@400;500;600&display=swap");
+
+$foreground-color: #dadada;
+$background-color: #151320;
+$border: #282438;
+$link-default: #b793ff;
+$link-visited: #9966ff;
+$link-hover: #cfbbf6;
+$text: "DM Sans", "Helvetica", "Arial", sans-serif;
+$heading: "DM Sans", "Helvetica", "Arial", sans-serif;
+$monospace: "Victor Mono", monospace;
+$highlight-fg: $background-color;
+$highlight-bg: $foreground-color;
+$code-block-bg: color.mix($background-color, $border, 70%);
+
+$gray-1: $foreground-color;
+$gray-2: color.mix($foreground-color, $background-color, 85%);
+$gray-3: color.mix($foreground-color, $background-color, 70%);
+$gray-4: color.mix($foreground-color, $background-color, 55%);
+$gray-5: color.mix($foreground-color, $background-color, 40%);
+$gray-6: color.mix($foreground-color, $background-color, 25%);
+$gray-7: color.mix($foreground-color, $background-color, 15%);
+$gray-8: $background-color;
+
+:root,
+:root[data-theme="light"] {
+    --sl-font: #{$text};
+    --sl-font-mono: #{$monospace};
+
+    --sl-color-white: #{$foreground-color};
+    --sl-color-black: #{$background-color};
+
+    --sl-color-gray-1: #{$gray-1};
+    --sl-color-gray-2: #{$gray-2};
+    --sl-color-gray-3: #{$gray-3};
+    --sl-color-gray-4: #{$gray-4};
+    --sl-color-gray-5: #{$gray-5};
+    --sl-color-gray-6: #{$gray-6};
+    --sl-color-gray-7: #{$gray-7};
+    --sl-color-gray-8: #{$gray-8};
+
+    --sl-color-accent-low: #{$border};
+    --sl-color-accent: #{$link-default};
+    --sl-color-accent-high: #{$link-hover};
+
+    --sl-color-bg: #{$background-color};
+    --sl-color-bg-nav: #{$background-color};
+    --sl-color-bg-sidebar: #{$background-color};
+    --sl-color-bg-inline-code: #{$border};
+
+    --sl-color-hairline-light: #{$border};
+    --sl-color-hairline: #{$border};
+    --sl-color-hairline-shade: #{$border};
+
+    --sl-color-text: #{$foreground-color};
+    --sl-color-text-accent: #{$link-default};
+    --sl-color-text-invert: #{$background-color};
+
+    --sl-color-link: #{$link-default};
+    --sl-color-link-visited: #{$link-visited};
+    --sl-color-link-hover: #{$link-hover};
+}
+
+:where(h1, h2, h3, h4, h5, h6, .site-title) {
+    font-family: #{$heading};
+    font-weight: 400;
+}
+
+::selection {
+    color: #{$highlight-fg};
+    background: #{$highlight-bg};
+}
+
+:where(.expressive-code, pre) {
+    background-color: $code-block-bg;
+    outline: 1px solid $border;
+    border: 0;
+    border-radius: 0.5rem;
+    box-shadow: none;
+}
+
+:where(.expressive-code pre, pre) {
+    background-color: transparent;
+}
+
+:where(.expressive-code code, pre code) {
+    background-color: transparent;
+    color: $foreground-color;
+}
+
+.pagination-links {
+    gap: 1rem;
+
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+        padding: 1.25rem 1.5rem;
+        background-color: color.mix($background-color, $border, 70%);
+        border: 1px solid $border;
+        border-radius: 0.75rem;
+        box-shadow: none;
+        transition:
+            background-color 200ms ease,
+            border-color 200ms ease,
+            transform 200ms ease;
+
+        &:hover {
+            background-color: color.mix($background-color, $border, 60%);
+            transform: translateY(-2px);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $link-default;
+            outline-offset: 3px;
+        }
+
+        &[rel="prev"] {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        &[rel="next"] {
+            align-items: flex-end;
+            text-align: right;
+        }
+    }
+
+    .link-label {
+        font-size: 0.9rem;
+        color: color.mix($foreground-color, $background-color, 70%);
+    }
+
+    .link-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $foreground-color;
+    }
+}
+
+button[data-open-modal] {
+    background-color: color.mix($background-color, $border, 70%);
+    border: 1px solid $border;
+    border-radius: 0.5rem;
+    box-shadow: none;
+    min-width: 18rem;
+    color: $gray-4;
+    font-family: $text;
+    transition:
+        background-color 200ms ease,
+        border-color 200ms ease;
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        background-color: color.mix($background-color, $border, 60%);
+        border-color: $link-default;
+        outline: 0;
+        color: $gray-3;
+    }
+
+    .sl-flex {
+        color: inherit;
+    }
+
+    kbd {
+        background-color: color.mix($background-color, $border, 40%);
+        border-color: color.mix($border, $link-default, 80%);
+        color: color.mix($link-default, $gray-5, 50%);
+        font-family: $monospace;
+        border-radius: 0.25rem;
+    }
+
+    svg {
+        color: $gray-5;
+    }
+}
+
+.header {
+    border-block-end-color: var(--sl-color-hairline);
+
+    > .sl-flex:not(.title-wrapper):not(.right-group) {
+        flex: 1 1 auto;
+        justify-content: flex-end;
+        margin-inline-start: auto;
+    }
+}
+
+@media (min-width: 50rem) {
+    .header {
+        > .sl-flex:not(.title-wrapper):not(.right-group) {
+            justify-self: end;
+        }
+    }
+}
+
+.social-icons {
+    &::after {
+        border-inline-end: 0;
+        content: none;
+    }
+}
+
+.sidebar-pane {
+    border-inline-end: 1px solid var(--sl-color-hairline);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html[data-has-hero] {
+        .hero {
+            animation: hero-fade-in 500ms ease-out both;
+
+            .copy {
+                animation: hero-slide-up 500ms ease-out 80ms both;
+            }
+
+            .actions {
+                animation: hero-slide-up 500ms ease-out 160ms both;
+            }
+
+            > img,
+            > .hero-html {
+                animation: hero-slide-up 600ms ease-out 120ms both;
+            }
+        }
+    }
+}
+
+@keyframes hero-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+// ─── Link cards ──────────────────────────────────────────────────────────────
+
+.card {
+    background-color: color.mix($background-color, $border, 70%);
+    border: 1px solid $border;
+    border-radius: 0.75rem;
+    box-shadow: none;
+    transition:
+        background-color 200ms ease,
+        border-color 200ms ease;
+
+    &:hover {
+        background-color: color.mix($background-color, $border, 60%);
+        border-color: $link-default;
+    }
+
+    .title {
+        color: $foreground-color;
+        font-weight: 500;
+
+        a {
+            color: $link-default;
+
+            &:hover {
+                color: $link-hover;
+            }
+        }
+    }
+
+    p {
+        color: $gray-4;
+    }
+}
+
+// ─── Aside / callout cards ────────────────────────────────────────────────────
+
+aside.starlight-aside {
+    border-radius: 0.5rem;
+    border-inline-start-width: 0;
+    border-width: 1px;
+
+    &--note {
+        background-color: color.mix($background-color, #1e2d52, 40%);
+        border-color: #1e2d52;
+        color: #91b4e8;
+
+        .starlight-aside__title {
+            color: $link-default;
+        }
+    }
+
+    &--tip {
+        background-color: color.mix($background-color, #1a3028, 40%);
+        border-color: #1a3028;
+        color: #6bbfa0;
+
+        .starlight-aside__title {
+            color: #5dcaa5;
+        }
+    }
+
+    &--caution {
+        background-color: color.mix($background-color, #352a10, 40%);
+        border-color: #352a10;
+        color: #c9992a;
+
+        .starlight-aside__title {
+            color: #e8a030;
+        }
+    }
+
+    &--danger {
+        background-color: color.mix($background-color, #3a1e22, 40%);
+        border-color: #3a1e22;
+        color: #d97a85;
+
+        .starlight-aside__title {
+            color: #e07080;
+        }
+    }
+
+    .starlight-aside__title {
+        font-weight: 500;
+        font-family: $text;
+    }
+}
+
+@keyframes hero-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
