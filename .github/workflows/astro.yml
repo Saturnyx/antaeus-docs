@@ -60,8 +60,10 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Cache pnpm store
-        if: steps.detect-package-manager.outputs.manager == 'pnpm'
         uses: actions/cache@v4
         with:
           path: ~/.local/share/pnpm/store
