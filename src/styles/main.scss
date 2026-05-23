@@ -238,7 +238,7 @@ button[data-open-modal] {
     }
 }
 
-// ─── Link cards ──────────────────────────────────────────────────────────────
+// ─── Link cards (generic Card component) ─────────────────────────────────────
 
 .card {
     background-color: color.mix($background-color, $border, 70%);
@@ -268,6 +268,43 @@ button[data-open-modal] {
     }
 
     p {
+        color: $gray-4;
+    }
+}
+
+// ─── Link cards (Starlight LinkCard component) ────────────────────────────────
+
+.sl-link-card {
+    background-color: color.mix($background-color, $border, 70%);
+    border: 1px solid $border;
+    border-radius: 0.75rem;
+    box-shadow: none;
+    transition:
+        background-color 200ms ease,
+        border-color 200ms ease,
+        transform 200ms ease;
+
+    &:hover {
+        background-color: color.mix($background-color, $border, 60%);
+        border-color: $link-default;
+        transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $link-default;
+        outline-offset: 3px;
+    }
+
+    .sl-link-card-icon {
+        color: $link-default;
+    }
+
+    .sl-link-card-title {
+        color: $foreground-color;
+        font-weight: 500;
+    }
+
+    .sl-link-card-desc {
         color: $gray-4;
     }
 }

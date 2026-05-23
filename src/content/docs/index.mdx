@@ -15,26 +15,32 @@ hero:
       icon: external
       variant: minimal
 ---
-
+import { LinkCard } from '@astrojs/starlight/components';
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkButton } from '@astrojs/starlight/components';
 
-## Next steps
+## Why pick Antaeus?
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="No more random bugs">
+	Antaeus is written in Rust. It is safe, secure, and fast. Say goodbye to
+	un-debuggable errors.
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Cutting edge">
+	Includes newer features that are constantly updated and improved.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Extensible">
+	Make your own libraries that work with Antaeus. The API is designed to be easy
+  to use and extend.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Programmer-friendly">
+	Shortcuts and mappings provided for fast and efficient development.
+	Focus on building your project, not on fighting the framework.
 	</Card>
 </CardGrid>
+
+
+# Start using Antaeus
+<LinkCard title="Getting Started" href="/guides/example/" />
+---
+Licensed under AGPL-3.0. Copyright (c) 2024 Harshal
