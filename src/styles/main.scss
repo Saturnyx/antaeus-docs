@@ -1,35 +1,38 @@
 @use "sass:color";
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Victor+Mono:wght@400;500;600&display=swap");
 
-$foreground-color: #dadada;
-$background-color: #151320;
-$border: #282438;
-$link-default: #b793ff;
-$link-visited: #9966ff;
-$link-hover: #cfbbf6;
-$text: "DM Sans", "Helvetica", "Arial", sans-serif;
-$heading: "DM Sans", "Helvetica", "Arial", sans-serif;
-$monospace: "Victor Mono", monospace;
-$highlight-fg: $background-color;
-$highlight-bg: $foreground-color;
-$code-block-bg: color.mix($background-color, $border, 70%);
+// ─── Tokens ───────────────────────────────────────────────────────────────────
 
-$gray-1: $foreground-color;
-$gray-2: color.mix($foreground-color, $background-color, 85%);
-$gray-3: color.mix($foreground-color, $background-color, 70%);
-$gray-4: color.mix($foreground-color, $background-color, 55%);
-$gray-5: color.mix($foreground-color, $background-color, 40%);
-$gray-6: color.mix($foreground-color, $background-color, 25%);
-$gray-7: color.mix($foreground-color, $background-color, 15%);
-$gray-8: $background-color;
+$fg: #b8b2d4;
+$heading-fg: #e8e4f5;
+$bg: #151320;
+$border: #282438;
+$accent: #b793ff;
+$accent-vis: #9966ff;
+$accent-hi: #cfbbf6;
+$text: "DM Sans", "Helvetica", "Arial", sans-serif;
+$mono: "Victor Mono", monospace;
+$code-bg: color.mix($bg, $border, 70%);
+
+$gray-1: $fg;
+$gray-2: color.mix($fg, $bg, 85%);
+$gray-3: color.mix($fg, $bg, 70%);
+$gray-4: color.mix($fg, $bg, 55%);
+$gray-5: color.mix($fg, $bg, 40%);
+$gray-6: color.mix($fg, $bg, 25%);
+$gray-7: color.mix($fg, $bg, 15%);
+$gray-8: $bg;
+
+// ─── Theme ────────────────────────────────────────────────────────────────────
 
 :root,
 :root[data-theme="light"] {
     --sl-font: #{$text};
-    --sl-font-mono: #{$monospace};
+    --sl-font-mono: #{$mono};
+    font-size: 1.0625rem;
 
-    --sl-color-white: #{$foreground-color};
-    --sl-color-black: #{$background-color};
+    --sl-color-white: #{$fg};
+    --sl-color-black: #{$bg};
 
     --sl-color-gray-1: #{$gray-1};
     --sl-color-gray-2: #{$gray-2};
@@ -41,39 +44,44 @@ $gray-8: $background-color;
     --sl-color-gray-8: #{$gray-8};
 
     --sl-color-accent-low: #{$border};
-    --sl-color-accent: #{$link-default};
-    --sl-color-accent-high: #{$link-hover};
+    --sl-color-accent: #{$accent};
+    --sl-color-accent-high: #{$accent-hi};
 
-    --sl-color-bg: #{$background-color};
-    --sl-color-bg-nav: #{$background-color};
-    --sl-color-bg-sidebar: #{$background-color};
+    --sl-color-bg: #{$bg};
+    --sl-color-bg-nav: #{$bg};
+    --sl-color-bg-sidebar: #{$bg};
     --sl-color-bg-inline-code: #{$border};
 
     --sl-color-hairline-light: #{$border};
     --sl-color-hairline: #{$border};
     --sl-color-hairline-shade: #{$border};
 
-    --sl-color-text: #{$foreground-color};
-    --sl-color-text-accent: #{$link-default};
-    --sl-color-text-invert: #{$background-color};
+    --sl-color-text: #{$fg};
+    --sl-color-text-accent: #{$accent};
+    --sl-color-text-invert: #{$bg};
 
-    --sl-color-link: #{$link-default};
-    --sl-color-link-visited: #{$link-visited};
-    --sl-color-link-hover: #{$link-hover};
+    --sl-color-link: #{$accent};
+    --sl-color-link-visited: #{$accent-vis};
+    --sl-color-link-hover: #{$accent-hi};
 }
 
+// ─── Typography ───────────────────────────────────────────────────────────────
+
 :where(h1, h2, h3, h4, h5, h6, .site-title) {
-    font-family: #{$heading};
+    font-family: #{$text};
     font-weight: 400;
+    color: #{$heading-fg};
 }
 
 ::selection {
-    color: #{$highlight-fg};
-    background: #{$highlight-bg};
+    color: #{$bg};
+    background: #{$fg};
 }
 
+// ─── Code blocks ─────────────────────────────────────────────────────────────
+
 :where(.expressive-code, pre) {
-    background-color: $code-block-bg;
+    background-color: $code-bg;
     outline: 1px solid $border;
     border: 0;
     border-radius: 0.5rem;
@@ -83,65 +91,41 @@ $gray-8: $background-color;
 :where(.expressive-code pre, pre) {
     background-color: transparent;
 }
-
 :where(.expressive-code code, pre code) {
     background-color: transparent;
-    color: $foreground-color;
+    color: $fg;
 }
 
-.pagination-links {
-    gap: 1rem;
+// ─── Header ───────────────────────────────────────────────────────────────────
 
-    a {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 0.25rem;
-        padding: 1.25rem 1.5rem;
-        background-color: color.mix($background-color, $border, 70%);
-        border: 1px solid $border;
-        border-radius: 0.75rem;
-        box-shadow: none;
-        transition:
-            background-color 200ms ease,
-            border-color 200ms ease,
-            transform 200ms ease;
+.header {
+    border-block-end-color: var(--sl-color-hairline);
 
-        &:hover {
-            background-color: color.mix($background-color, $border, 60%);
-            transform: translateY(-2px);
-        }
-
-        &:focus-visible {
-            outline: 2px solid $link-default;
-            outline-offset: 3px;
-        }
-
-        &[rel="prev"] {
-            align-items: flex-start;
-            text-align: left;
-        }
-
-        &[rel="next"] {
-            align-items: flex-end;
-            text-align: right;
-        }
-    }
-
-    .link-label {
-        font-size: 0.9rem;
-        color: color.mix($foreground-color, $background-color, 70%);
-    }
-
-    .link-title {
-        font-size: 1.5rem;
-        font-weight: 500;
-        color: $foreground-color;
+    > .sl-flex:not(.title-wrapper):not(.right-group) {
+        flex: 1 1 auto;
+        justify-content: flex-end;
+        margin-inline-start: auto;
     }
 }
+
+@media (min-width: 50rem) {
+    .header > .sl-flex:not(.title-wrapper):not(.right-group) {
+        justify-self: end;
+    }
+}
+
+.social-icons::after {
+    border-inline-end: 0;
+    content: none;
+}
+.sidebar-pane {
+    border-inline-end: 1px solid var(--sl-color-hairline);
+}
+
+// ─── Search button ────────────────────────────────────────────────────────────
 
 button[data-open-modal] {
-    background-color: color.mix($background-color, $border, 70%);
+    background-color: color.mix($bg, $border, 70%);
     border: 1px solid $border;
     border-radius: 0.5rem;
     box-shadow: none;
@@ -155,8 +139,8 @@ button[data-open-modal] {
     &:hover,
     &:focus,
     &:focus-visible {
-        background-color: color.mix($background-color, $border, 60%);
-        border-color: $link-default;
+        background-color: color.mix($bg, $border, 60%);
+        border-color: $accent;
         outline: 0;
         color: $gray-3;
     }
@@ -164,84 +148,72 @@ button[data-open-modal] {
     .sl-flex {
         color: inherit;
     }
-
-    kbd {
-        background-color: color.mix($background-color, $border, 40%);
-        border-color: color.mix($border, $link-default, 80%);
-        color: color.mix($link-default, $gray-5, 50%);
-        font-family: $monospace;
-        border-radius: 0.25rem;
-    }
-
     svg {
         color: $gray-5;
     }
-}
 
-.header {
-    border-block-end-color: var(--sl-color-hairline);
-
-    > .sl-flex:not(.title-wrapper):not(.right-group) {
-        flex: 1 1 auto;
-        justify-content: flex-end;
-        margin-inline-start: auto;
+    kbd {
+        background-color: color.mix($bg, $border, 40%);
+        border-color: color.mix($border, $accent, 80%);
+        color: color.mix($accent, $gray-5, 50%);
+        font-family: $mono;
+        border-radius: 0.25rem;
     }
 }
 
-@media (min-width: 50rem) {
-    .header {
-        > .sl-flex:not(.title-wrapper):not(.right-group) {
-            justify-self: end;
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+.pagination-links {
+    gap: 1rem;
+
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+        padding: 1.25rem 1.5rem;
+        background-color: color.mix($bg, $border, 70%);
+        border: 1px solid $border;
+        border-radius: 0.75rem;
+        box-shadow: none;
+        transition:
+            background-color 200ms ease,
+            border-color 200ms ease,
+            transform 200ms ease;
+
+        &:hover {
+            background-color: color.mix($bg, $border, 60%);
+            transform: translateY(-2px);
+        }
+        &:focus-visible {
+            outline: 2px solid $accent;
+            outline-offset: 3px;
+        }
+        &[rel="prev"] {
+            align-items: flex-start;
+            text-align: left;
+        }
+        &[rel="next"] {
+            align-items: flex-end;
+            text-align: right;
         }
     }
-}
 
-.social-icons {
-    &::after {
-        border-inline-end: 0;
-        content: none;
+    .link-label {
+        font-size: 0.9rem;
+        color: $gray-3;
+    }
+    .link-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $fg;
     }
 }
 
-.sidebar-pane {
-    border-inline-end: 1px solid var(--sl-color-hairline);
-}
+// ─── Cards ────────────────────────────────────────────────────────────────────
 
-@media (prefers-reduced-motion: no-preference) {
-    html[data-has-hero] {
-        .hero {
-            animation: hero-fade-in 500ms ease-out both;
-
-            .copy {
-                animation: hero-slide-up 500ms ease-out 80ms both;
-            }
-
-            .actions {
-                animation: hero-slide-up 500ms ease-out 160ms both;
-            }
-
-            > img,
-            > .hero-html {
-                animation: hero-slide-up 600ms ease-out 120ms both;
-            }
-        }
-    }
-}
-
-@keyframes hero-fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-// ─── Link cards (generic Card component) ─────────────────────────────────────
-
-.card {
-    background-color: color.mix($background-color, $border, 70%);
+%card-base {
+    background-color: color.mix($bg, $border, 70%);
     border: 1px solid $border;
     border-radius: 0.75rem;
     box-shadow: none;
@@ -250,124 +222,133 @@ button[data-open-modal] {
         border-color 200ms ease;
 
     &:hover {
-        background-color: color.mix($background-color, $border, 60%);
-        border-color: $link-default;
+        background-color: color.mix($bg, $border, 60%);
+        border-color: $accent;
     }
+}
+
+.card {
+    @extend %card-base;
 
     .title {
-        color: $foreground-color;
+        color: $fg;
         font-weight: 500;
-
-        a {
-            color: $link-default;
-
-            &:hover {
-                color: $link-hover;
-            }
+    }
+    .title a {
+        color: $accent;
+        &:hover {
+            color: $accent-hi;
         }
     }
-
     p {
         color: $gray-4;
     }
 }
 
-// ─── Link cards (Starlight LinkCard component) ────────────────────────────────
-
 .sl-link-card {
-    background-color: color.mix($background-color, $border, 70%);
-    border: 1px solid $border;
-    border-radius: 0.75rem;
-    box-shadow: none;
+    @extend %card-base;
     transition:
         background-color 200ms ease,
         border-color 200ms ease,
         transform 200ms ease;
 
     &:hover {
-        background-color: color.mix($background-color, $border, 60%);
-        border-color: $link-default;
         transform: translateY(-2px);
     }
-
     &:focus-visible {
-        outline: 2px solid $link-default;
+        outline: 2px solid $accent;
         outline-offset: 3px;
     }
 
     .sl-link-card-icon {
-        color: $link-default;
+        color: $accent;
     }
-
     .sl-link-card-title {
-        color: $foreground-color;
+        color: $fg;
         font-weight: 500;
     }
-
     .sl-link-card-desc {
         color: $gray-4;
     }
 }
 
-// ─── Aside / callout cards ────────────────────────────────────────────────────
+// ─── Asides ───────────────────────────────────────────────────────────────────
 
 aside.starlight-aside {
     border-radius: 0.5rem;
     border-inline-start-width: 0;
     border-width: 1px;
 
-    &--note {
-        background-color: color.mix($background-color, #1e2d52, 40%);
-        border-color: #1e2d52;
-        color: #91b4e8;
-
-        .starlight-aside__title {
-            color: $link-default;
-        }
-    }
-
-    &--tip {
-        background-color: color.mix($background-color, #1a3028, 40%);
-        border-color: #1a3028;
-        color: #6bbfa0;
-
-        .starlight-aside__title {
-            color: #5dcaa5;
-        }
-    }
-
-    &--caution {
-        background-color: color.mix($background-color, #352a10, 40%);
-        border-color: #352a10;
-        color: #c9992a;
-
-        .starlight-aside__title {
-            color: #e8a030;
-        }
-    }
-
-    &--danger {
-        background-color: color.mix($background-color, #3a1e22, 40%);
-        border-color: #3a1e22;
-        color: #d97a85;
-
-        .starlight-aside__title {
-            color: #e07080;
-        }
-    }
-
     .starlight-aside__title {
         font-weight: 500;
         font-family: $text;
     }
+
+    &--note {
+        background-color: color.mix($bg, #1e2d52, 40%);
+        border-color: #1e2d52;
+        color: #91b4e8;
+        .starlight-aside__title {
+            color: $accent;
+        }
+    }
+    &--tip {
+        background-color: color.mix($bg, #1a3028, 40%);
+        border-color: #1a3028;
+        color: #6bbfa0;
+        .starlight-aside__title {
+            color: #5dcaa5;
+        }
+    }
+    &--caution {
+        background-color: color.mix($bg, #352a10, 40%);
+        border-color: #352a10;
+        color: #c9992a;
+        .starlight-aside__title {
+            color: #e8a030;
+        }
+    }
+    &--danger {
+        background-color: color.mix($bg, #3a1e22, 40%);
+        border-color: #3a1e22;
+        color: #d97a85;
+        .starlight-aside__title {
+            color: #e07080;
+        }
+    }
 }
 
+// ─── Hero animations ──────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: no-preference) {
+    html[data-has-hero] .hero {
+        animation: hero-fade-in 500ms ease-out both;
+        .copy {
+            animation: hero-slide-up 500ms ease-out 80ms both;
+        }
+        .actions {
+            animation: hero-slide-up 500ms ease-out 160ms both;
+        }
+        > img,
+        > .hero-html {
+            animation: hero-slide-up 600ms ease-out 120ms both;
+        }
+    }
+}
+
+@keyframes hero-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 @keyframes hero-slide-up {
     from {
         opacity: 0;
         transform: translateY(8px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);

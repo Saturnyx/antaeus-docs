@@ -1,0 +1,59 @@
+---
+title: Introduction
+description: Let's get started
+lastUpdated: 2026-05-23
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+# Welcome to Antaeus
+This site will serve as a guide to using the Antaeus framework. It will cover
+installation, usage, and best practices for building your VEX projects with
+Antaeus. Guides here are designed to be easy to follow, but if you are an
+expert, you may prefer to the
+[API Reference](https://docs.rs/antaeus/latest/antaeus/) for more detailed
+information.
+
+## Why use Antaeus?
+Antaeus aims to follow the following principles:
+
+<Card title="Safe">
+    Handles any type of error without crashing immediately.
+    This best-effort approach ensures the robot achieves at least a few of its
+    targets even when unexpected issues arise.
+</Card>
+
+<Card title="Modern">
+    Newer next-gen algorithms are being prototyped and
+    implemented. Antaeus is constantly updated to match the VEX community's newest
+    improvements and innovations.
+</Card>
+
+<Card title="Extensible">
+    Using Rust polymorphism and traits, Antaeus is designed to be easily
+    extended. You can make your own libraries that work with Antaeus, and the
+    API is designed to be easy to use and extend.
+</Card>
+
+## When to **not** use Antaeus
+Well, there are some situations where Antaeus may not be the best choice:
+
+<Card title="Absolute Beginners">
+    How do you know if you are an absolute beginner? Check out the
+    Prerequisites{/* TODO: Add Link Here */} section of the guide. If you don't
+    meet ate least 50% of those, you may want to start with something simpler
+    like [VEXcode V5](https://www.vexrobotics.com/vexcode/install/v5).
+</Card>
+<Card title="I Have a Competition Tomorrow">
+    If you need to develop your code  in a very short period of time, Antaeus or
+    Vexide in general might not suit you. Using
+    [PROS](https://pros.cs.purdue.edu/) with libraries such as
+    [Lemlib](https://github.com/LemLib/LemLib) or
+    [Ez-template](https://ez-robotics.github.io/EZ-Template/) will help.
+</Card>
+
+## Current State of Development
+Antaeus is currently in early development. The API is not yet stable, and though
+most features have been implemented, many of them have yet to be tested. If you
+are willing to help me test these programs please do contact me. Contact info
+can be found in my [github profile](https://github.com/Saturnyx).
