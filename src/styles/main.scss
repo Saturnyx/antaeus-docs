@@ -1,7 +1,7 @@
 @use "sass:color";
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Victor+Mono:wght@400;500;600&display=swap");
 
-// ─── Tokens ───────────────────────────────────────────────────────────────────
+// ─── Tokens ──────────────────────────────────────────────────────────────────
 
 $fg: #b8b2d4;
 $heading-fg: #e8e4f5;
@@ -23,7 +23,7 @@ $gray-6: color.mix($fg, $bg, 25%);
 $gray-7: color.mix($fg, $bg, 15%);
 $gray-8: $bg;
 
-// ─── Theme ────────────────────────────────────────────────────────────────────
+// ─── Theme ───────────────────────────────────────────────────────────────────
 
 :root,
 :root[data-theme="light"] {
@@ -65,7 +65,7 @@ $gray-8: $bg;
     --sl-color-link-hover: #{$accent-hi};
 }
 
-// ─── Typography ───────────────────────────────────────────────────────────────
+// ─── Typography ──────────────────────────────────────────────────────────────
 
 :where(h1, h2, h3, h4, h5, h6, .site-title) {
     font-family: #{$text};
@@ -96,7 +96,7 @@ $gray-8: $bg;
     color: $fg;
 }
 
-// ─── Header ───────────────────────────────────────────────────────────────────
+// ─── Header ──────────────────────────────────────────────────────────────────
 
 .header {
     border-block-end-color: var(--sl-color-hairline);
@@ -122,7 +122,7 @@ $gray-8: $bg;
     border-inline-end: 1px solid var(--sl-color-hairline);
 }
 
-// ─── Search button ────────────────────────────────────────────────────────────
+// ─── Search button ───────────────────────────────────────────────────────────
 
 button[data-open-modal] {
     background-color: color.mix($bg, $border, 70%);
@@ -161,7 +161,7 @@ button[data-open-modal] {
     }
 }
 
-// ─── Pagination ───────────────────────────────────────────────────────────────
+// ─── Pagination ──────────────────────────────────────────────────────────────
 
 .pagination-links {
     gap: 1rem;
@@ -210,7 +210,7 @@ button[data-open-modal] {
     }
 }
 
-// ─── Cards ────────────────────────────────────────────────────────────────────
+// ─── Cards ───────────────────────────────────────────────────────────────────
 
 %card-base {
     background-color: color.mix($bg, $border, 70%);
@@ -272,7 +272,7 @@ button[data-open-modal] {
     }
 }
 
-// ─── Asides ───────────────────────────────────────────────────────────────────
+// ─── Asides ──────────────────────────────────────────────────────────────────
 
 aside.starlight-aside {
     border-radius: 0.5rem;
@@ -289,7 +289,7 @@ aside.starlight-aside {
         border-color: #1e2d52;
         color: #91b4e8;
         .starlight-aside__title {
-            color: $accent;
+            color: #91b4e8;
         }
     }
     &--tip {
@@ -318,7 +318,7 @@ aside.starlight-aside {
     }
 }
 
-// ─── Hero animations ──────────────────────────────────────────────────────────
+// ─── Hero animations ─────────────────────────────────────────────────────────
 
 @media (prefers-reduced-motion: no-preference) {
     html[data-has-hero] .hero {
@@ -352,5 +352,71 @@ aside.starlight-aside {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+// ─── Sidebar nav ─────────────────────────────────────────────────────────────
+
+.sidebar-content {
+    summary {
+        border-block-end: none;
+        padding-block-end: 0.5rem;
+        margin-block-end: 0;
+        position: relative;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            inset-inline: -2rem;
+            block-size: 1px;
+            inset-block-end: 0;
+            background-color: $border;
+        }
+
+        .group-label .large {
+            font-family: $mono;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: $gray-4;
+        }
+    }
+
+    ul,
+    li {
+        border-inline-start: none !important;
+    }
+
+    a {
+        border-radius: 0;
+        border: none;
+        background: transparent;
+        color: $gray-3;
+        font-weight: 600;
+        width: calc(100% + 4rem);
+        margin-inline-start: -2rem;
+        padding-inline-start: 2.75rem;
+        transition:
+            color 150ms ease,
+            background-color 150ms ease;
+        &:hover {
+            background-color: color.mix($bg, $border, 60%);
+            color: $fg;
+        }
+
+        &:focus-visible {
+            outline-offset: 2px;
+        }
+    }
+
+    a[aria-current="page"] {
+        background-color: color.mix($bg, $accent, 85%);
+        color: $accent;
+
+        &:hover {
+            background-color: color.mix($bg, $accent, 78%);
+            color: $accent-hi;
+        }
     }
 }
