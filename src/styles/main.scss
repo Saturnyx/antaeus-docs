@@ -505,3 +505,15 @@ starlight-file-tree {
         margin-inline-start: 0.5rem;
     }
 }
+
+// ─── Search modal ────────────────────────────────────────────────────────────
+
+dialog[aria-label="Search"] {
+    background-color: $bg;
+    border: 1px solid $border;
+    border-radius: 0.25rem;
+
+    &::backdrop {
+        background-color: rgba($bg, 0.8);
+    }
+}

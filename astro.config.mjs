@@ -30,6 +30,10 @@ export default defineConfig({
           label: "Examples",
           items: [{ autogenerate: { directory: "examples" } }],
         },
+        {
+          label: "API Reference",
+          link: "https://docs.rs/antaeus/latest/antaeus/",
+        },
       ],
     }),
   ],
