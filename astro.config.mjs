@@ -5,6 +5,7 @@ import starlight from "@astrojs/starlight";
 // https://astro.build/config
 export default defineConfig({
   site: "https://harshal.is-cool.dev/antaeus-docs/",
+  base: "/antaeus-docs",
   integrations: [
     starlight({
       title: "Antaeus Documentation",
