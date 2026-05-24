@@ -2,6 +2,8 @@
 title: Prerequisites
 description: What you should already know
 lastUpdated: 2026-05-25
+sidebar:
+  order: 2
 ---
 
 import { Aside } from '@astrojs/starlight/components';
@@ -116,5 +118,19 @@ somewhat familiar to you.
   - rust-toolchain.toml
 </FileTree>
 
+## Adding Antaeus
 Good, now we have a generic Vexide Project. Next, we will be looking into how
-to modify it using Antaeus to make it work for our robot.
+to modify it using Antaeus to make it work for our robot. Antaeus is available
+on [crates.io](https://crates.io/crates/antaeus), so you can easily add it using
+a single command:
+
+```bash
+cargo add antaeus
+```
+
+or you can add it manually to your `Cargo.toml` file:
+
+```toml add={2}
+[dependencies]
+antaeus = "0.3.8"
+```
