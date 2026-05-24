@@ -27,8 +27,8 @@ export default defineConfig({
           items: [{ autogenerate: { directory: "intro" } }],
         },
         {
-          label: "Examples",
-          items: [{ autogenerate: { directory: "examples" } }],
+          label: "Concepts",
+          items: [{ autogenerate: { directory: "concepts" } }],
         },
         {
           label: "API Reference",

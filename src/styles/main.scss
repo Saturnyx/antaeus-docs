@@ -355,9 +355,21 @@ aside.starlight-aside {
         transform: translateY(0);
     }
 }
+
 // ─── Sidebar nav ─────────────────────────────────────────────────────────────
 
 .sidebar-content {
+    overflow-x: hidden;
+    .top-level {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        > li:last-child {
+            margin-block-start: auto !important;
+        }
+    }
+
     summary {
         border-block-end: none;
         padding-block-end: 0.5rem;
@@ -372,8 +384,8 @@ aside.starlight-aside {
             block-size: 1px;
             inset-block-end: 0;
             background-color: $border;
-            transform: translateZ(0); // force GPU layer, prevents subpixel blur
-            will-change: transform; // hint to keep it stable
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .group-label .large {
@@ -390,6 +402,10 @@ aside.starlight-aside {
         border-inline-start: none !important;
     }
 
+    li {
+        margin-block: 0 !important;
+    }
+
     a {
         border-radius: 0;
         border: none;
@@ -402,6 +418,7 @@ aside.starlight-aside {
         transition:
             color 150ms ease,
             background-color 150ms ease;
+
         &:hover {
             background-color: color.mix($bg, $border, 60%);
             color: $fg;
@@ -429,20 +446,20 @@ aside.starlight-aside {
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: $gray-4;
-        padding-block: 0.5rem;
+        padding-block-end: 0.5rem;
+        padding-block-start: 1rem !important;
         padding-inline-start: 2.75rem;
         position: relative;
-        width: calc(100% + 4rem);
+        width: calc(100% + 2rem);
         margin-inline-start: -2rem;
-        margin-block-start: 0.5rem;
 
         &::before {
             content: "";
             display: block;
             position: absolute;
-            inset-inline: 0;
+            inset-inline: -2rem;
             block-size: 1px;
-            inset-block-start: 0;
+            inset-block-start: 0rem;
             background-color: $border;
             transform: translateZ(0);
         }
@@ -454,7 +471,7 @@ aside.starlight-aside {
     }
 }
 
-// ─── File tree ────────────────────────────────────────────────────────────────
+// ─── File tree ───────────────────────────────────────────────────────────────
 
 starlight-file-tree {
     border: 1px solid $border;
@@ -551,7 +568,7 @@ dialog[aria-label="Search"] {
     }
 }
 
-// ─── Last updated ─────────────────────────────────────────────────────────────
+// ─── Last updated ────────────────────────────────────────────────────────────
 
 p:has(time[datetime]) {
     font-family: $mono;
