@@ -420,3 +420,88 @@ aside.starlight-aside {
         }
     }
 }
+
+// ─── File tree ────────────────────────────────────────────────────────────────
+
+starlight-file-tree {
+    border: 1px solid $border;
+    border-radius: 0.25rem;
+    background-color: color.mix($bg, $border, 70%);
+    font-family: $mono;
+    font-size: 0.875rem;
+
+    ul {
+        list-style: none;
+        padding-inline-start: 1.25rem;
+        margin: 0;
+        border-inline-start: 1px solid $border;
+    }
+
+    > ul {
+        padding: 0.5rem 0;
+        border-inline-start: none;
+    }
+
+    li {
+        margin: 0;
+    }
+
+    .tree-entry {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.2rem 0.75rem;
+        color: $gray-3;
+        transition: color 150ms ease;
+    }
+
+    summary {
+        cursor: pointer;
+        list-style: none;
+        border-block-end: none;
+        padding-block-end: 0;
+        margin-block-end: 0;
+
+        &::after {
+            display: none;
+        }
+
+        &:hover .tree-entry {
+            color: $fg;
+        }
+
+        .tree-entry {
+            color: $fg;
+            font-weight: 500;
+        }
+    }
+
+    .tree-icon {
+        flex-shrink: 0;
+        color: $gray-5;
+        fill: currentColor;
+    }
+
+    .directory > details > summary .tree-icon {
+        color: $accent;
+    }
+
+    .highlight {
+        color: $accent-hi;
+        font-weight: 600;
+        background-color: transparent;
+        outline: 1px solid $accent;
+        border-radius: 0.25rem;
+
+        .tree-icon {
+            color: $accent;
+        }
+    }
+
+    .comment {
+        color: $gray-5;
+        font-weight: 400;
+        font-style: italic;
+        margin-inline-start: 0.5rem;
+    }
+}
