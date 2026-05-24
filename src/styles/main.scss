@@ -372,6 +372,8 @@ aside.starlight-aside {
             block-size: 1px;
             inset-block-end: 0;
             background-color: $border;
+            transform: translateZ(0); // force GPU layer, prevents subpixel blur
+            will-change: transform; // hint to keep it stable
         }
 
         .group-label .large {
@@ -417,6 +419,37 @@ aside.starlight-aside {
         &:hover {
             background-color: color.mix($bg, $accent, 78%);
             color: $accent-hi;
+        }
+    }
+
+    a.large {
+        font-family: $mono;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $gray-4;
+        padding-block: 0.5rem;
+        padding-inline-start: 2.75rem;
+        position: relative;
+        width: calc(100% + 4rem);
+        margin-inline-start: -2rem;
+        margin-block-start: 0.5rem;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            inset-inline: 0;
+            block-size: 1px;
+            inset-block-start: 0;
+            background-color: $border;
+            transform: translateZ(0);
+        }
+
+        &:hover {
+            background-color: color.mix($bg, $border, 60%);
+            color: $fg;
         }
     }
 }
@@ -516,4 +549,12 @@ dialog[aria-label="Search"] {
     &::backdrop {
         background-color: rgba($bg, 0.8);
     }
+}
+
+// ─── Last updated ─────────────────────────────────────────────────────────────
+
+p:has(time[datetime]) {
+    font-family: $mono;
+    font-style: italic;
+    color: $gray-4;
 }
