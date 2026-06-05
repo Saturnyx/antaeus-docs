@@ -544,3 +544,9 @@ p:has(time[datetime]) {
     font-style: italic;
     color: $gray-4;
 }
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,78 @@
+---
+title: Loop Architecture
+description: Update Loops
+lastUpdated: 2026-05-27
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import TaskImage from '../../../assets/tasks.png';
+import RaceImage from '../../../assets/race_condition.png';
+import UpdateLoopImage from '../../../assets/update_loop.png';
+import OverwriteImage from '../../../assets/overwrite.png';
+
+## Learning about Async Rust
+
+One of the best guides I have read about async Rust is one made by Vexide.
+I highly recommend reading this guide before continuing to read more about Async
+or multithreading. If you really want to know more about async Rust in general,
+you can also read *Asynchronous Programming in Rust* or visit the *Rust Book*.
+
+<LinkButton href="https://vexide.dev/docs/async-introduction/">
+    Vexide's Async Guide
+</LinkButton>
+<LinkButton href="https://rust-lang.github.io/async-book/">
+    Asynchronous Programming in Rust
+</LinkButton>
+<LinkButton href="https://doc.rust-lang.org/book/ch17-00-async-await.html/">
+    The Rust Book
+</LinkButton>
+
+## Using Unified Update Loops
+
+So, usually in most Vex Programs, loops are often threaded into their own
+task. This is a common method used in PROS where there is no problem regarding
+the ownership of peripherals. Here is a simple flow chart that demonstrates
+how the code works:
+
+<Image src={TaskImage} alt="" width={500}/>
+
+But this has a (not so) small problem: **race conditions**. A race condition
+occurs when a system’s outcome depends uncontrollably on the timing or sequence
+of concurrent events, like threads or processes.
+
+<Image src={RaceImage} alt="" width={400}/>
+
+To prevent this, we have to use update loops. Instead of multiple tasks/threads,
+we use a single loop that calls an update on each system.
+
+<Image src={UpdateLoopImage} alt="" width={600}/>
+
+Here, we can see that the peripherals first flow into the odometry algorithm,
+then the pure pursuit algorithm and finally the PID algorithm. This means that
+there are no threads and no sharing of peripherals at the same time. This
+removes any chance of a race condition as any input to a peripheral will be
+overwritten by the last algorithm (in this case PID).
+
+## A new problem
+
+But before we conclude, there is still a small problem. Remember how I talked
+about the last algorithm taking precedence over the rest? Well, that leads to
+a **logical overwriting bug**.
+
+<Image src={OverwriteImage} alt="" width={500}/>
+
+This type of bug is significantly easier to debug compared to race conditions
+because the behavior is at least predictable. However, to prevent dead code and
+unexpected behavior, it is highly recommended to calculate your states
+sequentially but only write to your physical hardware outputs (like motors)
+once per loop iteration, usually at the very end.
+
+## Conclusion
+
+By unifying your threads into a single update loop, you successfully eliminate
+unpredictable race conditions and timing issues. You can also use other concepts
+such as the **Single Source of Truth** and using the order of steps to
+intentionally overwrite in a specific priority. It is important to remember
+that not always would you want to implement update loops, sometimes traditional
+threads might do just as good. After all, at the end of the day, it's your code.
