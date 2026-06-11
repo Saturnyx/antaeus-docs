@@ -1,0 +1,108 @@
+---
+title: Pure Pursuit Variation
+description: Update Loops
+lastUpdated: 2026-06-11
+sidebar:
+  badge:  Anateus
+  order: 3
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import IntersectsImage from '../../../assets/intersect.png';
+import CbpImage from '../../../assets/cbp.png';
+
+
+## Pure Pursuit
+
+Pure Pursuit is a geometric path-tracking algorithm widely used in autonomous
+vehicles and mobile robotics to follow a predefined sequence of 2D waypoints.
+
+<LinkButton href="https://wiki.purduesigbots.com/software/control-algorithms/basic-pure-pursuit">
+    Learn More on the BLRS Wiki
+</LinkButton>
+
+The rest of this article will presume that you have the necessary knowledge
+about pure pursuit. So, it's important to make sure that you're well familiar
+with this algorithm.
+
+## Terminology
+
+Here is a few words that we'll be using that might differ from other articles,
+and hence, are good to take note of:
+
+ - Point: A dimensionless object with an `x` and `y` value
+ - Path: An ordered collection of Waypoints
+ - Waypoint: A point on the Path with a `t` Value
+ - Circle: A imaginary circle around the position of the robot
+ - Lookahead Distance: A constant that acts as the radius of the Circle
+ - `t` Value: An index used to represent the position of a Waypoint in a Path.
+   The first Waypoint(or origin) will have a `t` Value of `0.0`. The next Waypoint
+   will have a `t` value of `1.0`. A Point in the midpoint these 2 Waypoints may
+   have a `t` value of `0.5`. (`t` values are optional for Points)
+
+### How Pure Pursuit works
+
+1. Find the robot's current position on or near the path.
+2. Construct a lookahead circle centered on the robot.
+3. Find the intersection(s) of the path with that circle.
+4. Select the forward intersection.
+5. Drive toward that point.
+
+### Issues with standard Pure Pursuit Implementations
+
+While the standard implementation works pretty well under normal circumstances,
+but there are a couple of situations where the algorithm might not be able to
+handle right without much custom logic.
+
+Some examples include:
+
+1. Only 1 intersect at the end of Path
+2. More than 2 intersects between the Circle and Path
+
+<Image src={IntersectsImage} alt="" width={600}/>
+
+These issues are usually fixed using custom logic that run when such
+scenarios occur. However, there is a much simpler and easier way to handle all
+of this.
+
+## Candidate-Based Pursuit (CBP) Algorithm
+
+The CBP algorithm was created to handle the many edge-case scenarios that Pure
+Pursuit cannot handle and aims to be a significantly more robust variation.
+Under normal circumstances, the CBP algorithm returns identical output compared
+to the original Pure Pursuit algorithm. However, there are significant
+improvements in how the CBP handles errors.
+
+### Candidates
+
+Unlike traditional pure pursuit, CBP does not attempt to derive only a single
+point for the robot to move to. Rather, it first finds multiple points (or
+candidate points) that the robot can set as target. By doing so, the robot will
+**always** find at least one possible point.
+
+### Architecture
+
+<Image src={CbpImage} alt="" width={600}/>
+
+## Pros and Cons
+
+|| Traditional Pure Pursuit | Candidate Based Pursuit |
+| --- | --- | --- |
+| Custom Logic | Needs custom logic in multiple areas of the program | No custom logic needed |
+| Robust | Robustness depends on how custom logic is implemented | Very robust without custom logic |
+| Performance | Usually slightly faster | Might be less performant due to extra calculations |
+| Ease of Developement | Harder as custon logic has to be implemented for every scenario | Generally easier |
+
+## Implementations
+
+An implementation can be found in the
+[Antaeus](https://github.com/Saturnyx/antaeus) repository. Unfortunately,
+readability of code was not a top priority at that time and, rather, there was a
+focus on brevity. Hence, much of the code is quite hard to understand for a
+beginner. It is recommended that you are at least somewhat proficient in Rust
+and programming before viewing the file.
+
+<LinkButton href="https://github.com/Saturnyx/antaeus/blob/main/src/motion/pursuit/algorithm.rs">
+    View Antaeus Repository
+</LinkButton>

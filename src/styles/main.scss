@@ -409,12 +409,14 @@ aside.starlight-aside {
     a {
         border-radius: 0;
         border: none;
+        display: flex;
         background: transparent;
         color: $gray-3;
         font-weight: 400;
-        width: calc(100% + 4rem);
+        width: calc(100% + 3rem);
         margin-inline-start: -2rem;
         padding-inline-start: 2.75rem;
+
         transition:
             color 150ms ease,
             background-color 150ms ease;
@@ -438,6 +440,20 @@ aside.starlight-aside {
             color: $accent-hi;
         }
     }
+}
+
+/* src/styles/custom.css */
+
+/* Target Starlight's underlying Badge component wrapper everywhere */
+.sl-badge {
+    color: $bg;
+    background-color: $accent;
+    font-family: $text;
+    margin-left: auto;
+    border-radius: 0;
+    border: none;
+    display: inline-flex;
+    align-items: center; /* Centers text vertically */
 }
 
 // ─── File tree ───────────────────────────────────────────────────────────────

@@ -2,7 +2,11 @@
 title: Understanding Concepts
 description: About Concepts
 lastUpdated: 2026-05-25
+sidebar:
+  order: 1
 ---
+
+import { Badge } from '@astrojs/starlight/components';
 
 ## Why Concepts?
 
@@ -22,3 +26,19 @@ to implement these concepts. I have seen to many codebases patched to crudely
 modified examples from docs and I hope that yours doesn't end up in the same
 state. It's always important to remember that writing code is a better way of
 learning than reading code.
+
+## Badges
+Badges will be used to mark the scope of the concept:
+
+<Badge text="Generic" /> Relates to anything about programming and can be used
+anywhere.
+
+<Badge text="Robotics" /> Relates to anything about robotics, including
+competitive robotics like Vex or FRC.
+
+<Badge text="V5" /> Only relates to to Vex V5 robotics (often hardware related).
+But still includes other runtimes like PROS, and Vexcode.
+
+<Badge text="Vexide" /> Only related to the Vexide runtime.
+
+<Badge text="Antaeus" /> Only related to this specific library.
